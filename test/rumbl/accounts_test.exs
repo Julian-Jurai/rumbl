@@ -54,9 +54,16 @@ defmodule Rumbl.AccountsTest do
 
 
     test "returns user with correct password", %{user: user} do 
-      IO.puts(inspect(user))
-      # assert {:ok, auth_user} = Accounts.authenticate_by_username_and_pass(user.username, @pass)
-      # assert auth_user.id == user.id
+      assert {:ok, auth_user} = Accounts.authenticate_by_username_and_pass(user.username, @pass)
+      assert auth_user.id == user.id
+    end
+
+    test "returns unauthorized error with invalid password", %{user: user}do 
+      assert {:error, :unauthorized} = Accounts.authenticate_by_username_and_pass(user.username, "invalid_pass")
+    end
+
+    test "returns not found error with no matching user for email" do 
+      assert {:error, :not_found} = Accounts.authenticate_by_username_and_pass("unkownuser", @pass)
     end
   end
 end
