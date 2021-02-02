@@ -14,11 +14,7 @@ import "../css/app.scss";
 //
 import "phoenix_html";
 
-import Player from "./player";
+import socket from "./socket";
+import Video from "./video";
 
-let video = document.getElementById("video");
-if (video) {
-  Player.init(video.id, video.getAttribute("data-player-id"), (event) => {
-    console.log("player ready!", event);
-  });
-}
+Video.init(socket, document.getElementById("video"));

@@ -1,6 +1,6 @@
 defmodule RumblWeb.UserView do 
+  @derive Jason.Encoder
   use RumblWeb, :view
-
   alias Rumbl.Accounts
 
   def first_name(%Accounts.User{name: name}) do 
@@ -8,4 +8,8 @@ defmodule RumblWeb.UserView do
     |> String.split(" ")
     |> Enum.at(0)
   end
+
+  def render("user.json", %{user: user}) do
+    %{id: user.id, username: user.username}
+  end 
 end

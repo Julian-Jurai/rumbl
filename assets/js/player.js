@@ -26,7 +26,7 @@ let Player = {
     return Math.floor(this.player.getCurrentTime());
   },
   seekTo(millsec) {
-    return this.player.seekTo(millsec / 1000);
+    return this.player.seekTo(millsec);
   },
 };
 
